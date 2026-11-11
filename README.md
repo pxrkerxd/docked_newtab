@@ -1,4 +1,4 @@
-# 🌌 Aura Tab (Glassmorphic New Tab Extension)
+# 🌌 Docked (Glassmorphic New Tab Extension)
 
 A lightweight, high-performance Chrome extension designed to replace the standard new tab page with an aesthetic, customizable glassmorphic workspace.
 
