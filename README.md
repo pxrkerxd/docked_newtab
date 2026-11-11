@@ -17,3 +17,4 @@ A lightweight, high-performance Chrome extension designed to replace the standar
 2. Open Google Chrome and navigate to `chrome://extensions/`.
 3. Enable **Developer mode** in the top-right corner.
 4. Click **Load unpacked** and select your project folder.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/943e73af-d0ff-473a-b450-620f4c8e82cb" />
