@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Tab</title>
+    <link rel="stylesheet" href="newtab.css">
+</head>
+<body class="dark-theme">
+    <video id="bg-video" autoplay loop muted></video>
+    <div id="background-overlay"></div>
+
+    <div id="weather-widget" class="weather-widget glass-panel hidden">
+        <!-- Weather injected via JS -->
+    </div>
+
+    <main class="container" id="main-container">
+        <div class="time-container">
+            <div class="clock" id="clock">00:00</div>
+            <div class="greeting" id="greeting-display">Good morning</div>
+            <div class="date" id="date-display">Loading date...</div>
+        </div>
+        
+        <div class="quote" id="quote-display">Loading quote...</div>
+
+        <div class="dock glass-panel" id="dock">
+            <div class="drag-handle" id="dock-drag-handle" title="Drag to move dock">⋮⋮</div>
+            <div class="dock-items" id="dock-items">
+                <!-- Dynamically populated via JS (No more inline Add button) -->
+            </div>
+        </div>
+
+        <div class="todo-container glass-panel" id="todo-widget">
+            <h3>To do</h3>
+            <input type="text" id="todo-input" placeholder="Add a task and press Enter">
+            <ul id="todo-list"></ul>
+            <p id="todo-empty">Nothing to do. Add your first task above.</p>
+        </div>
+    </main>
+
+    <button id="settings-trigger" class="settings-trigger">⚙️</button>
+
+    <div id="settings-drawer" class="settings-drawer glass-panel hidden">
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <button id="close-settings">✖</button>
+        </div>
+        
+        <div class="settings-section">
+            <label>Personalization</label>
+            <input type="text" id="name-input" placeholder="Your Name (e.g. Parijat)" class="text-input" style="margin-bottom: 10px;">
+            
+            <label>Theme</label>
+            <div class="theme-selector">
+                <button data-theme="auto">Auto</button>
+                <button data-theme="light">Light</button>
+                <button data-theme="dark" class="active">Dark</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <label>Shortcuts / Apps</label>
+            <div id="settings-shortcuts-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 140px; overflow-y: auto; margin-bottom: 0.5rem;">
+                <!-- Managed via JS -->
+            </div>
+            <button id="open-add-shortcut-modal" class="upload-btn">+ Add New Shortcut</button>
+        </div>
+
+        <div class="settings-section">
+            <label>Wallpaper</label>
+            <div class="wallpaper-grid">
+                <button class="wp-btn" data-wp="sea" style="background: linear-gradient(to bottom right, #4389A2, #5C258D);">Sea</button>
+                <button class="wp-btn" data-wp="night" style="background: #141E30;">Night</button>
+                <button class="wp-btn" data-wp="sunrise" style="background: linear-gradient(to right, #ff9966, #ff5e62);">Sunrise</button>
+                <button class="wp-btn" data-wp="aurora" style="background: linear-gradient(45deg, #00c6ff, #0072ff);">Aurora</button>
+                <button class="wp-btn" data-wp="flow" style="background: linear-gradient(45deg, #ff9a9e, #fecfef); color: #333;">Flow</button>
+            </div>
+            <div class="slider-group" style="margin-top: 10px;">
+                <button id="custom-wp-btn" class="upload-btn">Upload Image or Video...</button>
+                <input type="file" id="custom-wp-upload" accept="image/*,video/*" style="display: none;">
+            </div>
+            <div class="slider-group">
+                <label>Darken wallpaper</label>
+                <input type="range" id="darken-slider" min="0" max="100" value="40">
+            </div>
+            <div class="slider-group">
+                <label>Blur wallpaper (Still & Live)</label>
+                <input type="range" id="blur-slider" min="0" max="50" value="0">
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <label>Typography & Clock</label>
+            <select id="font-select">
+                <option value="'Syncopate', sans-serif">Syncopate</option>
+                <option value="'Rajdhani', sans-serif">Rajdhani</option>
+                <option value="'Orbitron', sans-serif">Orbitron</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+                <option value="system-ui, sans-serif">System Default</option>
+            </select>
+            <div class="slider-group">
+                <label>Clock Font Size</label>
+                <input type="range" id="font-size-slider" min="3rem" max="15rem" step="0.5" value="6rem">
+            </div>
+            
+            <label style="margin-top: 10px;">Date & Greeting Font</label>
+            <select id="date-font-select">
+                <option value="system-ui, sans-serif">System Default</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+                <option value="'Pacifico', cursive">Pacifico</option>
+                <option value="'Caveat', cursive">Caveat</option>
+                <option value="'Righteous', cursive">Righteous</option>
+            </select>
+            
+            <div class="slider-group" style="margin-top: 10px;">
+                <label>Greeting Font Size</label>
+                <input type="range" id="greeting-font-slider" min="1rem" max="6rem" step="0.1" value="2rem">
+            </div>
+
+            <label class="checkbox-label" style="margin-top: 10px;"><input type="checkbox" id="format-24h" checked> 24-hour time</label>
+            <label class="checkbox-label"><input type="checkbox" id="show-seconds"> Show seconds</label>
+        </div>
+
+        <div class="settings-section">
+            <label>Widgets & Layout</label>
+            <label class="checkbox-label"><input type="checkbox" id="toggle-todo" checked> Show To-Do List</label>
+            <label class="checkbox-label"><input type="checkbox" id="toggle-dock-names" checked> Show Dock App Names</label>
+            
+            <div class="slider-group">
+                <label>Dock Scale / Size</label>
+                <input type="range" id="dock-scale-slider" min="0.6" max="1.5" step="0.05" value="1">
+            </div>
+            
+            <div class="slider-group">
+                <label>Dock Font Size</label>
+                <input type="range" id="dock-font-slider" min="0.5rem" max="1.5rem" step="0.1" value="0.85rem">
+            </div>
+            <button id="reset-dock-btn" class="upload-btn" style="margin-top: 10px;">Reset Dock Position</button>
+            
+            <label style="margin-top: 10px;">City (Live Weather)</label>
+            <input type="text" id="city-input" placeholder="e.g. Mumbai" class="text-input">
+        </div>
+    </div>
+
+    <!-- Add Shortcut Modal -->
+    <div id="modal-overlay" class="hidden"></div>
+    <div id="add-shortcut-modal" class="modal glass-panel hidden">
+        <h3>Add Shortcut</h3>
+        <input type="text" id="shortcut-name" placeholder="Name (e.g. Reddit)" class="text-input">
+        <input type="url" id="shortcut-url" placeholder="URL (e.g. https://reddit.com)" class="text-input">
+        <div class="modal-actions">
+            <button id="cancel-shortcut" class="btn-secondary">Cancel</button>
+            <button id="save-shortcut" class="btn-primary">Save Shortcut</button>
+        </div>
+    </div>
+
+    <script src="newtab.js"></script>
+</body>
+</html>

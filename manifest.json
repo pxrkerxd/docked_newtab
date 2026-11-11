@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Glassmorphic New Tab",
+  "version": "1.0",
+  "description": "Aesthetic dark glassmorphic new tab extension with dock scaling, settings-managed shortcuts, and clean dock UI.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": ["storage", "unlimitedStorage"]
+}
